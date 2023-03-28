@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarService _car;
+        ICarDal _car;
 
-        public CarManager(ICarService carServices)
+        public CarManager(ICarDal carServices)
         {
             _car = carServices;
         }
