@@ -16,7 +16,7 @@ namespace Business.Concrete
 
         public BrandManager(IBrandDal brandDal)
         {
-            this._brandDal = brandDal;
+            _brandDal = brandDal;
 
         }
         public IResult Add(Brand entity)
