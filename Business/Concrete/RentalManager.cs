@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -21,8 +22,30 @@ namespace Business.Concrete
             this._rentalDal = rentalDal;
 
         }
+        //public IResult Add(Rental entity)
+        //{
+        //    _rentalDal.Add(entity);
+        //    return new SuccessResult();
+        //}
+
         public IResult Add(Rental entity)
         {
+            //foreach (var item in _rentalDal.GetAll(p=> p.CarId==entity.CarId))
+            //{
+            //    if (item.ReturnDate==DateTime.MinValue)
+            //    {
+            //        Console.WriteLine( " ");
+            //        return new ErrorResult("Arama Müşteride");
+            //    }
+            //}
+
+            var result = _rentalDal.GetAll(c => c.CarId == entity.CarId).OrderBy(x => x.Id).LastOrDefault();
+
+            if (result.ReturnDate == null)
+            {
+                return new ErrorResult(Messages.NotAdded );
+            }
+
             _rentalDal.Add(entity);
             return new SuccessResult();
         }
